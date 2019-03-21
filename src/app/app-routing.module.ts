@@ -6,11 +6,16 @@ import { DepartmentListComponent } from "./department-list/department-list.compo
 import { EmployeeListComponent } from "./employee-list/employee-list.component";
 import { ProductslistComponent } from "./productslist/productslist.component";
 import { DepartmentDetailComponent } from "./department-detail/department-detail.component";
+import { DepartmentOverviewComponent } from "./department-overview/department-overview.component";
 
 const routes: Routes = [
-  { path: "", redirectTo: "/employees", pathMatch: "full" },
+  { path: "", redirectTo: "/departments", pathMatch: "full" },
   { path: "departments", component: DepartmentListComponent },
-  { path: "departments/:id", component: DepartmentDetailComponent },
+  {
+    path: "departments/:id",
+    component: DepartmentDetailComponent,
+    children: [{ path: "overview", component: DepartmentOverviewComponent }]
+  },
   { path: "employees", component: EmployeeListComponent },
   { path: "products", component: ProductslistComponent },
   { path: "**", component: PageNotFoundComponent }

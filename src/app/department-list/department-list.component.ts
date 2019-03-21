@@ -7,7 +7,7 @@ import { Router, ActivatedRoute, ParamMap } from "@angular/router";
   styleUrls: ["./department-list.component.css"]
 })
 export class DepartmentListComponent implements OnInit {
-  private selectedId;
+  private selectedId: number;
   private departments = [
     { id: 1, name: "Angular Team" },
     { id: 2, name: "Java Team" },
@@ -16,15 +16,16 @@ export class DepartmentListComponent implements OnInit {
     { id: 5, name: "SQL Team" }
   ];
 
-  constructor(private routes: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
-      this.selectedId = params.get("id");
+      this.selectedId = parseInt(params.get("id"));
     });
   }
 
   onClick(deps) {
-    this.routes.navigate(["/departments", deps.id]);
+    // this.routes.navigate(["/departments", deps.id]);
+    this.router.navigate([deps.id], { relativeTo: this.activatedRoute });
   }
 }

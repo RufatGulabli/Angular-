@@ -17,7 +17,7 @@ export class DepartmentDetailComponent implements OnInit {
       this.departmentId = parseInt(params.get("id"));
     });
   }
-
+  x;
   goPrevious() {
     let prevId = this.departmentId === 1 ? 1 : this.departmentId - 1;
     this.router.navigate(["/departments", prevId]);
@@ -30,6 +30,13 @@ export class DepartmentDetailComponent implements OnInit {
 
   goBack() {
     let selectedId = this.departmentId ? this.departmentId : null;
-    this.router.navigate(["/departments", { id: selectedId }]);
+    // this.router.navigate(["/departments", { id: selectedId }]);
+    this.router.navigate(["../", { id: selectedId }], {
+      relativeTo: this.activatedRoute
+    });
+  }
+
+  showOverview() {
+    this.router.navigate(["overview"], { relativeTo: this.activatedRoute });
   }
 }
